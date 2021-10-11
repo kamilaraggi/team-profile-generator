@@ -5,13 +5,19 @@ const Enginner = require ('./lib/Enginner');
 const Manager = require ('./lib/Manager');
 const Intern = require ('./lib/Intern');
 
-const Render = require('./lib/render-page.js');
+const render = require('./lib/render-page.js');
 const roleArr = []
 
 function questions(){
   console.log("///////////   Start build your team !!!     ///////////")
   inquirer
   .prompt([
+    {
+      type:"list",
+      message:"Whats the employee role?",
+      choices: ["Manager", "Enginner", "Intern"],
+      name:"role",
+    },
     {
     type: "input",
     message: "Whats the name of the employee?",
@@ -26,12 +32,6 @@ function questions(){
       type:"input",
       message:"Whats their E-mail Address?",
       name:"email",
-    },
-    {
-      type:"list",
-      message:"Whats their role?",
-      choices: ["Manager", "Enginner", "Intern"],
-      name:"role",
     },
   ]).then(function(answers) {
    if(answers.role === "Manager") {
@@ -119,7 +119,7 @@ function school(generalAnswers){
 }
 
 function buildTeam(){
-fs.writeFileSync('./dist/index.html', Render(roleArr),"utf-8");
+fs.writeFileSync('./dist/index.html', render(roleArr),"utf-8");
 }
 //generateHtml (fileName, data){
   //  fs.writeFile(fileName, (data), (err) => {
