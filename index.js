@@ -1,28 +1,30 @@
 const fs = require ('fs');
-const inquirer = require('inquirer');
+const inquirer = require ('inquirer');
 const Employee = require('./lib/Employee');
-const Enginner = require('./lib/Enginner');
-const Manager = require('./lib/Manager');
-const Intern = require('./lib/Intern');
-//const path = require("path");
+const Enginner = require ('./lib/Enginner');
+const Manager = require ('./lib/Manager');
+const Intern = require ('./lib/Intern');
+
+const Render = require('./lib/render-page.js');
 const roleArr = []
 
 function questions(){
+  console.log("///////////   Start build your team !!!     ///////////")
   inquirer
   .prompt([
     {
     type: "input",
-    message: "whats your name?",
+    message: "Whats the name of the employee?",
     name:"name",
     },
     {
       type:"input",
-      message: "what you employee ID?",
+      message: "whats employee ID?",
       name:"id",
     },
     {
       type:"input",
-      message:"Whats your E-mail Address?",
+      message:"Whats their E-mail Address?",
       name:"email",
     },
     {
@@ -116,9 +118,9 @@ function school(generalAnswers){
   })
 }
 
-//function buildTeam(){
-//fs.writeFileSync(outputPath, render(roleArr),"utf-8");
-//}
+function buildTeam(){
+fs.writeFileSync('./dist/index.html', Render(roleArr),"utf-8");
+}
 //generateHtml (fileName, data){
   //  fs.writeFile(fileName, (data), (err) => {
   //      if (err) {
@@ -139,5 +141,7 @@ function school(generalAnswers){
      // };
       
 //}
+
+
 
 questions();
